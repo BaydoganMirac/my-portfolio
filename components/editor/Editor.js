@@ -6,7 +6,7 @@ export default function Editor({ page, pageList }){
     const [pageContent, setPageContent] = useState(null);
     useEffect(()=>{
         const updateContent = async () =>{
-            let res = await axios.get('http://localhost:3000/api/content/'+page)
+            let res = await axios.get('/api/content/'+page)
             setPageContent(res.data)
         }
         updateContent();
