@@ -1,6 +1,6 @@
 # My Portfolio
 
-![My Portfolio](./screenshot.png)
+![My Portfolio](./screenshot-my-portfolio.jpg)
 
 Welcome to my personal portfolio website! This project is built using NEXT.js, a React-based framework, and it serves as a showcase of my skills, projects, and experiences.
 
