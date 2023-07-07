@@ -7,7 +7,7 @@ export default function Editor({ page, pageList }){
     useEffect(()=>{
         const updateContent = async () =>{
             let res = await axios.get('/api/content/'+page)
-            setPageContent(res.data)
+            setPageContent(res.data ?? "404")
         }
         updateContent();
     }, [page])
