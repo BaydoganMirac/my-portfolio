@@ -4,7 +4,8 @@ import React, {  useEffect, useState } from "react";
 function Navigation({ activePage, pageList, children }) {
     // TODO : Folder section will load from database
     const [sidebarStatus, setSidebarStatus] = useState(false);
-    const pageListComponent = pageList.forEach((item, index) => {
+    pageList = pageList === undefined ? [] : pageList;
+    const pageListComponent = pageList.map((item, index) => {
         return <Link key={index} href={'/'+item}>
                         <a href="#" className={`flex items-center p-2 text-base font-normal rounded-lg text-white hover:text-black hover:bg-gray-100 dark:hover:bg-gray-700 ${item == activePage ? 'font-bold bg-[#565656]': ''}` }>
                         <Image src={'/json.svg'} layout='intrinsic' height={20} width={20}  className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 fill-yellow-600 dark:text-gray-400 group-hover:text-black dark:group-hover:text-white" alt="JSON"></Image>

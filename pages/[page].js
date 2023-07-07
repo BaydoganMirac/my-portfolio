@@ -1,8 +1,6 @@
-import { useRouter } from 'next/router'
 import Editor from '../components/editor/Editor';
 import Navigation from '../components/navigation/navigation';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 export default function Page({pageList, pageContent, page}){
@@ -62,16 +60,16 @@ export default function Page({pageList, pageContent, page}){
     </>)
 }
 export async function getServerSideProps(context){
-  let resPageContent = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/content/${context.params.page}`)
-  let pageContent = resPageContent.data;
+  let page = context?.params?.page ?? 'Aboutme';
   const resPageList = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/pages`)
   let pageList = resPageList.data.pages;
-
+  const resPageContent = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/content/${page}`)
+  let pageContent = resPageContent.data;
   return {
     props: {
-      pageContent, 
       pageList,
-      page: context.params.page
+      pageContent, 
+      page
     }
   }
 }

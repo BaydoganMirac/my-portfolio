@@ -1,9 +1,8 @@
-import { useState } from "react";
 import Tab from "./Tab";
 
 export default function Header({ page, pageList}){
-    const [ pages, setPages ] = useState(pageList);
-    const pageComponent = pages.map((element, index) => {
+    pageList = pageList === undefined ? [] : pageList;
+    const pageComponent = pageList.map((element, index) => {
                  return <Tab key={index} active={element == page } name={element}></Tab>
             })
     
