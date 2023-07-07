@@ -5,12 +5,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
-export default function Page({pageList}){
-    const router = useRouter();
-    const [page, setPage] = useState(pageList[0]);
-    useEffect(() => {
-      setPage((page) => router.query.page ?? page)
-    },[router.query])
+export default function Page({pageList, pageContent, page}){
     return (<>
     <Head>
       <title>BaydoganMirac | {page}</title>
@@ -62,25 +57,21 @@ export default function Page({pageList}){
     </Head>
     
     <div className="flex flex-row w-full overflow-hidden">
-      <Navigation activePage={page} pageList={pageList}><Editor page={page} pageList={pageList}></Editor></Navigation>
+      <Navigation activePage={page} pageList={pageList}><Editor page={page} pageList={pageList} pageContent={pageContent}></Editor></Navigation>
     </div>
     </>)
 }
-export async function getStaticPaths(){
-    const res = await axios('http://localhost:3000/api/pages')
-    let paths = await res.data.pages.map((val) => {
-        return { params: { page : val } };
-    });
-    return {
-        paths,
-        fallback: false, // false or 'blocking'
-    };
-}
-export async function getStaticProps() {
-    const res = await axios('http://localhost:3000/api/pages')
-    return {
-      props: {
-        pageList : res.data.pages
-      }
+export async function getServerSideProps(context){
+  let resPageContent = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/content/${context.params.page}`)
+  let pageContent = resPageContent.data;
+  const resPageList = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/pages`)
+  let pageList = resPageList.data.pages;
+
+  return {
+    props: {
+      pageContent, 
+      pageList,
+      page: context.params.page
     }
+  }
 }

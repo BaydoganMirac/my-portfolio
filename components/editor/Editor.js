@@ -1,16 +1,6 @@
 import Header from "./Header"
 import Code from "./Code"
-import axios from "axios"
-import { useEffect, useState } from "react"
-export default function Editor({ page, pageList }){
-    const [pageContent, setPageContent] = useState(null);
-    useEffect(()=>{
-        const updateContent = async () =>{
-            let res = await axios.get('/api/content/'+page)
-            setPageContent(res.data ?? "404")
-        }
-        updateContent();
-    }, [page])
+export default function Editor({ page, pageList, pageContent }){
     return (<>
     <div className="w-full h-full">
         <Header page={page} pageList={pageList}></Header>
