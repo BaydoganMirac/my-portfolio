@@ -15,7 +15,7 @@ Welcome to my personal portfolio website! This project is built using NEXT.js, a
 
 ## Live Demo
 
-Check out the live demo of the portfolio website [here](https://baydoganmirac.net) or [vercel](https://will-be-update.com).
+Check out the live demo of the portfolio website [here](https://baydoganmirac.net) or [vercel](https://my-portfolio-smoky-kappa.vercel.app/).
 
 ## Technologies Used
 
